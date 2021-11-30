@@ -11,7 +11,10 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
+ItemHandler.accessPath = "/test";
+
 app.MapGet("/", () => Results.Ok());
+app.Map(ItemHandler.accessPath, ItemHandler.handle);
 app.MapGet("/tasks", TaskHandler.getAllTasks);
 app.MapGet("/tasks/{id}", TaskHandler.getSpecificTask);
 app.MapPost("/tasks", TaskHandler.postTask);
