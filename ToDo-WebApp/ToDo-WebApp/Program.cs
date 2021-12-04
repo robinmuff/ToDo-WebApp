@@ -4,6 +4,7 @@ using ToDo_WebApp.DB;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TaskDBContext>(options => options.UseInMemoryDatabase("Tasks"));
+builder.Services.AddDbContext<ItemDBContext>(options => options.UseInMemoryDatabase("Items"));
 await using var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -11,7 +12,7 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-ItemHandler.accessPath = "/test";
+ItemHandler.accessPath = "/items";
 
 app.MapGet("/", () => Results.Ok());
 app.Map(ItemHandler.accessPath, ItemHandler.handle);
